@@ -2,8 +2,8 @@
   hosts: all
   vars:                                       # Global Variables : Variables can be accessed by all the tasks of the play.
     URL: play.google.com
-  vars_files:
-    - dev-vars.yaml
+  #vars_files:
+   # - dev-vars.yaml
   tasks:
     - name: Printing the variable value
       ansible.builtin.debug:
