@@ -2,12 +2,12 @@
 
 - name: Demo on using facts
   hosts: all
-  gather_facts: false
+  # gather_facts: false         using this we can control on gathering the facts
   tasks:
     - name: Printing the fact
       ansible.builtin.debug:
         msg: Value of the ansible_distribution is {{ ansible_distribution }}
 
-    - name: Printing the fact
-      ansible.builtin.debug:
-        msg: Value of the ansible_env.ANSIBLE_DEPRECATION_WARNINGS is {{ ansible_env.ANSIBLE_DEPRECATION_WARNINGS }}    
+    # - name: Printing the fact
+    #   ansible.builtin.debug:
+    #     msg: Value of the ansible_env.ANSIBLE_DEPRECATION_WARNINGS is {{ ansible_env.ANSIBLE_DEPRECATION_WARNINGS }}    
