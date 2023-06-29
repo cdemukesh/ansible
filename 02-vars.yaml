@@ -13,6 +13,13 @@
       vars:                                   # Local Variables
         URL: task.google.com
 
+    - name: Demo to show variable from command line
+      ansible.builtin.debug:
+        msg: Value of the URL is {{ URL_ARG }}
+
+
+# Local Variables > Global Variables
+
 # If you try to print a variable that is not declared will throw an error.
     # - name: Printing the variable value
     #   ansible.builtin.debug:
