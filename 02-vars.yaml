@@ -19,7 +19,7 @@
 
     - name: Printing variable without quotes
       ansible.builtin.debug:
-        msg: {{ URL_ARG }}
+        msg: "{{ URL_ARG }} Value"
 
 # Local Variables > Global Variables
 
