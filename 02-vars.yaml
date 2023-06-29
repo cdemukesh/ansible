@@ -4,6 +4,9 @@
     URL: play.google.com
   vars_files:
     - dev-vars.yaml
+  vars_prompt:
+    - name: URLNAME
+    - prompt: Enter the URLNAME
   tasks:
     - name: Printing the variable value
       ansible.builtin.debug:
@@ -19,12 +22,12 @@
       ansible.builtin.debug:
         msg: "{{ URL }} Value"
 
-    - name: Printing to show variable from command line which is not declared.
+    - name: Printing to prompt variable .
       ansible.builtin.debug:
-        msg: Value of the URL is {{ CARNAME }}
+        msg: URL from the prompt variable is {{ URLNAME }}
 
-
-# Local Variables > Global Variables
+# Variable Precedence:
+# CLI variables > Local Variables > File Variables > Global Variables
 
 # If you try to print a variable that is not declared will throw an error.
     # - name: Printing the variable value
