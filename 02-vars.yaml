@@ -1,12 +1,19 @@
 - name: Demo on using variables on playbooks
   hosts: all
-  vars:
+  vars:                                       # Global Variables : Variables can be accessed by all the tasks of the play.
     URL: play.google.com
   tasks:
     - name: Printing the variable value
       ansible.builtin.debug:
         msg: Value of the URL is {{ URL }}
 
-    - name: Printing the variable value
+    - name: Demo to show local task variable
       ansible.builtin.debug:
-        msg: Value of the URL is {{ URL1 }}
+        msg: Value of the URL is {{ URL }}
+      vars:                                   # Local Variables
+        URL: task.google.com
+
+# If you try to print a variable that is not declared will throw an error.
+    # - name: Printing the variable value
+    #   ansible.builtin.debug:
+    #     msg: Value of the URL is {{ URL1 }}
