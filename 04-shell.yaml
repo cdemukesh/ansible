@@ -7,4 +7,12 @@
 
     - name: Printing the output variable
       ansible.builtin.debug: 
-        msg: "{{ OUT.rc }}"
+        msg: "{{ OUT.stdout }}"
+
+    - name: Declaring the variable
+      set_fact:
+        STATUSCODE: "{{ OUT.rc }}"
+    
+    - name: Printing the output variable
+      ansible.builtin.debug:
+        msg: Uptime command exit code is {{STATUSCODE}}
