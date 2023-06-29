@@ -6,3 +6,7 @@
     - name: Printing the variable value
       ansible.builtin.debug:
         msg: Value of the URL is {{ URL }}
+
+    - name: Printing the variable value
+      ansible.builtin.debug:
+      msg: Value of the URL is {{ URL1 }}
