@@ -6,7 +6,7 @@
     - dev-vars.yaml
   vars_prompt:
     - name: URLNAME
-    - prompt: Enter the URLNAME
+      prompt: Enter the URLNAME
   tasks:
     - name: Printing the variable value
       ansible.builtin.debug:
