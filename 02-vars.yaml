@@ -17,6 +17,9 @@
       ansible.builtin.debug:
         msg: Value of the URL is {{ URL_ARG }}
 
+    - name: Printing variable without quotes
+      ansible.builtin.debug:
+        msg: {{ URL_ARG }}
 
 # Local Variables > Global Variables
 
