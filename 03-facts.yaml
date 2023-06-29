@@ -6,3 +6,7 @@
     - name: Printing the fact
       ansible.builtin.debug:
         msg: Value of the ansible_distribution is {{ ansible_distribution }}
+
+    - name: Printing the fact
+      ansible.builtin.debug:
+        msg: Value of the ansible_env.ANSIBLE_DEPRECATION_WARNINGS is {{ ansible_env.ANSIBLE_DEPRECATION_WARNINGS }}    
