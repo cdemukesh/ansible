@@ -6,7 +6,7 @@
     action1: true
     action2: 1
     action3: on
-    action4: no
+    action4: yes
   tasks:
     - name: Run this task only when the ansible_distribution is CentOS
       ansible.builtin.debug:
@@ -22,4 +22,9 @@
     - name: Run this action
       ansible.builtin.debug:
         msg: I am learning Ansible and I will only print when actio is true
-      when: action1 and action2 and action3 and action4
+      when: action1 and action2 and action3 and action4     # BOOLEAN value can be ‘yes’, ‘on’, ‘1’, or ‘true’.
+
+    - name: I will run only when the value bar is not declared.
+      ansible.builtin.debug:
+        msg: BAR is not declared
+      when: bar is undefined
