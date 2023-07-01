@@ -7,9 +7,9 @@
       register: OUT
       ignore_errors: true
 
-    # - name: Printing the output variable
-    #   ansible.builtin.debug: 
-    #     msg: "{{ OUT }}"
+    - name: Printing the output variable
+      ansible.builtin.debug: 
+        msg: "{{ OUT }}"
 
     # - name: Declaring the variable
     #   set_fact:
