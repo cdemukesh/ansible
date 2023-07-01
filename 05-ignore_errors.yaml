@@ -2,7 +2,8 @@
   hosts: all
   tasks:
     - name: Checking Tomcat Status
-      ansible.builtin.shell: ps -ef | grep java | grep -v grep
+      ansible.builtin.shell: uptime
+      # ansible.builtin.shell: ps -ef | grep java | grep -v grep
       register: OUT
       # ignore_errors: yes
 
