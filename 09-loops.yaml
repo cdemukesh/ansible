@@ -5,12 +5,8 @@
   tasks:
     - name: Demo on using LOOP 1
       ansible.builtin.debug:
-        msg: Value of the item is 10
-
-    - name: Demo on using LOOP 2
-      ansible.builtin.debug:
-        msg: Value of the item is 20
-
-    - name: Demo on using LOOP 3
-      ansible.builtin.debug:
-        msg: Value of the item is 30
+        msg: Value of the item is {{ ite }}
+      loop:
+        - 10
+        - 20
+        - 30
