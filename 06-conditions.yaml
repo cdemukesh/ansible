@@ -17,6 +17,6 @@
       when: ansible_distribution == "Debian" 
       
     - name: Run this action
-      ansible.builtin.debug
+      ansible.builtin.debug:
         msg: I am learning Ansible and I will only print when actio is true
       when: action
