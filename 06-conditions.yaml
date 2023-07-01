@@ -6,7 +6,7 @@
     action1: true
     action2: 1
     action3: on
-    action4: yes
+    action4: no
   tasks:
     - name: Run this task only when the ansible_distribution is CentOS
       ansible.builtin.debug:
