@@ -5,7 +5,7 @@
   tasks:
     - name: Demo on using LOOP 1
       ansible.builtin.debug:
-        msg: Value of the item is {{ ite }}
+        msg: Value of the item is {{ item }}
       loop:
         - 10
         - 20
