@@ -1,7 +1,7 @@
 # Demo on privilege esclation
 
 - name: Demonstrating Privilege Escalation
-  host: all
+  hosts: all
   tasks:
     - name: Checking the user id
       ansible.builtin.shell: id
