@@ -4,6 +4,7 @@
   hosts: all
   vars:
     action1: true
+    action2: 1
   tasks:
     - name: Run this task only when the ansible_distribution is CentOS
       ansible.builtin.debug:
@@ -19,4 +20,4 @@
     - name: Run this action
       ansible.builtin.debug:
         msg: I am learning Ansible and I will only print when actio is true
-      when: action1
+      when: action1 and action2
