@@ -1,0 +1,16 @@
+# Demo on using LOOPS
+
+- name: Demo on using LOOPS
+  hosts: all
+  tasks:
+    - name: Demo on using LOOP 1
+      ansible.builtin.debug:
+        msg: Value of the item is 10
+
+    - name: Demo on using LOOP 2
+      ansible.builtin.debug:
+        msg: Value of the item is 20
+
+    - name: Demo on using LOOP 3
+      ansible.builtin.debug:
+        msg: Value of the item is 30
