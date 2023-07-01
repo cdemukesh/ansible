@@ -2,6 +2,8 @@
 
 - name: Demo on using conditions
   hosts: all
+  vars:
+    action: false
   tasks:
     - name: Run this task only when the ansible_distribution is CentOS
       ansible.builtin.debug:
@@ -13,6 +15,8 @@
       ansible.builtin.debug:
         msg: I am a Debian Machine
       when: ansible_distribution == "Debian" 
-    # - name: Printing the fact
-    #   ansible.builtin.debug:
-    #     msg: Value of the ansible_env.ANSIBLE_DEPRECATION_WARNINGS is {{ ansible_env.ANSIBLE_DEPRECATION_WARNINGS }}    
+      
+    - name: Run this action
+      ansible.builtin.debug
+        msg: I am learning Ansible and I will only print when actio is true
+      when: action
