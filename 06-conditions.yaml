@@ -1,0 +1,18 @@
+# Demo on conditions
+
+- name: Demo on using conditions
+  hosts: all
+  tasks:
+    - name: Run this task only when the ansible_distribution is CentOS
+      ansible.builtin.debug:
+        msg: I am a CentOS Machine
+      when: ansible_distribution == "CentOS" 
+        # Value of the ansible_distribution is {{ ansible_distribution }}
+
+    - name: Run this task only when the ansible_distribution is Debian
+      ansible.builtin.debug:
+        msg: I am a Debian Machine
+      when: ansible_distribution == "Debian" 
+    # - name: Printing the fact
+    #   ansible.builtin.debug:
+    #     msg: Value of the ansible_env.ANSIBLE_DEPRECATION_WARNINGS is {{ ansible_env.ANSIBLE_DEPRECATION_WARNINGS }}    

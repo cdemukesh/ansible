@@ -5,7 +5,7 @@
       # ansible.builtin.shell: uptime
       ansible.builtin.shell: ps -ef | grep java | grep -v grep
       register: OUT
-      ignore_errors: true
+      ignore_errors: true             # This will ignore the error ie non zero return code and proceed further.
 
     - name: Printing the output variable
       ansible.builtin.debug: 
