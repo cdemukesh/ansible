@@ -1,0 +1,8 @@
+- name: Demo on secret encryption on playbook
+  hosts: localhost
+  wars:
+    PASSWORD: pswrd1325
+  tasks:
+    - name: Demo on secret
+      ansible.builtin.debug:
+        msg: "PASSWORD is {{ PASSWORD }}"
