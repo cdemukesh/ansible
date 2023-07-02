@@ -6,4 +6,4 @@
     - name: Copying the systemd file
       ansible.builtin.copy:
         src: systemd.txt
-        dest: /home/centos/
+        dest: /home/centos/systemd.txt
