@@ -1,10 +1,19 @@
 # Demo on installing package
 
 - name: Demo on installing package
-  hosts: all
+  hosts: prod
   become: yes
   tasks:
     - name: Installing nginx
       ansible.builtin.package:
         name: nginx
+        state: present
+
+- name: Demo on httpd package
+  hosts: dev
+  become: yes
+  tasks:
+    - name: Installing httpd
+      ansible.builtin.package:
+        name: httpd
         state: present
