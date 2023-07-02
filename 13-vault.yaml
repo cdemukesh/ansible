@@ -1,6 +1,6 @@
 - name: Demo on secret encryption on playbook
   hosts: localhost
-  wars:
+  vars:
     PASSWORD: pswrd1325
   tasks:
     - name: Demo on secret
