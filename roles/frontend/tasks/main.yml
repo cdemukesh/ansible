@@ -2,3 +2,9 @@
   ansible.builtin.package:
     name: nginx
     state: present
+
+- name: Starting nginx
+  ansible.builtin.systemd:
+    name: nginx
+    state: started
+    enabled: true
