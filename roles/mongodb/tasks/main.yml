@@ -26,12 +26,22 @@
     dest: /tmp
     remote_src: yes
 
-- name: Injecting the MongoDB Catalogue Schema
-  community.mongodb.mongodb_shell:
-    file: "/tmp/{{COMPONENT}}-main/catalogue.js"
-    idempotent: yes
+# - name: Injecting the MongoDB Catalogue Schema
+#   community.mongodb.mongodb_shell:
+#     file: "/tmp/{{COMPONENT}}-main/catalogue.js"
+#     idempotent: yes
 
-- name: Injecting the MongoDB Users Schema
+- name: Injecting the MongoDB {{ item }} Schema
   community.mongodb.mongodb_shell:
-    file: "/tmp/{{COMPONENT}}-main/users.js"
+    file: "/tmp/{{COMPONENT}}-main/{{ item }}.js"
     idempotent: yes
+  loop:
+    - catalogue
+    - users
+      #   - name: Demo on using LOOP 1
+      # ansible.builtin.debug:
+      #   msg: Value of the item is {{ item }}
+      # loop:
+      #   - 10
+      #   - 20
+      #   - 30
