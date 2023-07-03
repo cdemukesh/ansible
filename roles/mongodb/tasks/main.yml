@@ -1,4 +1,4 @@
-- name: Coonfiguring the MongoDB Repository
+- name: Configuring the MongoDB Repository
   ansible.builtin.copy:
     src: "{{COMPONENT}}.repo"
     dest: /etc/yum.repos.d/{{COMPONENT}}.repo
@@ -7,3 +7,15 @@
   ansible.builtin.package:
     name: mongodb-org
     state: present
+
+# - name: Downloading and extracting the component
+#   ansible.builtin.unarchive:
+#     src: https://github.com/stans-robot-project/mongodb/archive/main.zip
+#     dest: /tmp
+#     remote_src: yes
+
+- name: Starting MongoDB
+  ansible.builtin.systemd:
+    name: mongod
+    state: restarted
+    enabled: true
