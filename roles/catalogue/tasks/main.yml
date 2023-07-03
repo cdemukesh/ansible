@@ -11,10 +11,16 @@
     name: roboshop
     comment: Roboshop Application User
 
-# - name: Configuring the MongoDB Repository
-#   ansible.builtin.copy:
-#     src: "{{COMPONENT}}.repo"
-#     dest: /etc/yum.repos.d/{{COMPONENT}}.repo
+- name: Download and extract the {{COMPONENT}}
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
+
+- name: Copying the files to the Roboshop home directory
+  ansible.builtin.copy:
+    src: /tmp/{{COMPONENT}}-main/
+    dest: /home/{{APPUSER}}/{{COMPONENT}}/
+    remote_src: yes
 
 
 
