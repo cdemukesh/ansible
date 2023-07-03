@@ -1,0 +1,38 @@
+- name: Configuring Nodejs Repo
+  ansible.builtin.shell: curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash -
+      
+# - name: Configuring the MongoDB Repository
+#   ansible.builtin.copy:
+#     src: "{{COMPONENT}}.repo"
+#     dest: /etc/yum.repos.d/{{COMPONENT}}.repo
+
+# - name: Installing MongoDB
+#   ansible.builtin.package:
+#     name: mongodb-org
+#     state: present
+
+# - name: Updating the MongoDB Config to be public
+#   ansible.builtin.replace:
+#     path: /etc/mongod.conf
+#     regexp: '127.0.0.1'
+#     replace: '0.0.0.0'
+
+# - name: Starting MongoDB
+#   ansible.builtin.systemd:
+#     name: mongod
+#     state: restarted
+#     enabled: true
+
+
+# - name: Download and extract the {{COMPONENT}}
+#   ansible.builtin.include_role:
+#     name: common
+#     tasks_from: download
+
+# - name: Injecting the MongoDB Schema
+#   community.mongodb.mongodb_shell:
+#     file: "/tmp/{{COMPONENT}}-main/{{ item }}.js"
+#     idempotent: yes
+#   loop:
+#     - catalogue
+#     - users
