@@ -3,8 +3,46 @@
     name: nginx
     state: present
 
+- name: Downloading and extracting the component
+  ansible.builtin.unarchive:
+    src: https://github.com/stans-robot-project/frontend/archive/main.zip
+    dest: /tmp
+    remote_src: yes
+
+- name: Clean up of old HTML content
+  ansible.builtin.file:
+    path: /usr/share/nginx/html
+    state: absent
+
+- name: Copy the frontnd component which is downloaded on the remote machine nginx path
+  ansible.builtin.copy:
+    src: /tmp/frontend-main/static/
+    dest: /usr/share/nginx/html
+    remote_src: yes
+# If the source you're trying to copy is on the remote machine, ensureyou give the remore_src as yes
+
+- name: Copy the proxy config
+  ansible.builtin.copy:
+    src: roboshop.conf
+    dest: /usr/share/nginx/html
+    remote_src: yes
+
 - name: Starting nginx
   ansible.builtin.systemd:
     name: nginx
     state: started
     enabled: true
+
+
+#"https://github.com/stans-robot-project/frontend/archive/main.zip"
+# - name: Unarchive a file that is already on the remote machine
+#   ansible.builtin.unarchive:
+#     src: /tmp/foo.zip
+#     dest: /usr/local/bin
+#     remote_src: yes
+
+# - name: Unarchive a file that needs to be downloaded (added in 2.0)
+#   ansible.builtin.unarchive:
+#     src: https://example.com/example.zip
+#     dest: /usr/local/bin
+#     remote_src: yes
