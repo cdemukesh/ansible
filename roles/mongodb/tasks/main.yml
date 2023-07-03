@@ -1,3 +1,9 @@
-- name: Print Hello from mongodb
-  ansible.builtin.debug:
-    msg: Hello from mongodb
+- name: Coonfiguring the MongoDB Repository
+  ansible.builtin.copy:
+    src: "{{COMPONENT}}.repo"
+    dest: /etc/yum.repos.d/{{COMPONENT}}.repo
+
+- name: Installing MongoDB
+  ansible.builtin.package:
+    name: mongodb-org
+    state: present
