@@ -25,12 +25,12 @@
   ansible.builtin.copy:
     src: roboshop.conf
     dest: /usr/share/nginx/html
-    remote_src: yes
+
 
 - name: Starting nginx
   ansible.builtin.systemd:
     name: nginx
-    state: started
+    state: restarted
     enabled: true
 
 
