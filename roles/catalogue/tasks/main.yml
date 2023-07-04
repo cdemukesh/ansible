@@ -16,6 +16,9 @@
     name: common
     tasks_from: download
 
+- name: Generaring Artifacts
+  community.general.npm:
+    path: /home/{{APPUSER}}/{{COMPONENT}}/
 
 
 
