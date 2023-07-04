@@ -20,7 +20,10 @@
   community.general.npm:
     path: /home/{{APPUSER}}/{{COMPONENT}}/
 
-
+- name: Copying the systemd file
+  ansible.builtin.copy:
+    src: systemd.service
+    dest: /etc/systemd/system/{{COMPONENT}}.service
 
 
 # - name: Updating the MongoDB Config to be public
