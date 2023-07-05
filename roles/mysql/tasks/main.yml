@@ -16,11 +16,11 @@
     enabled: true
 
 - name: Extracting pwd shell
-  ansible.builtin.shell:
+  ansible.builtin.shell: "grep 'temporary password' /var/log/mysqld.log | awk -F ' ' '{ print $NF }'"
   register: DEFAULT_PASSWORD_S
   
 - name: Printing the default pwd
-  ansible.builtin.debug: 'grep "temporary password" /var/log/mysqld.log | awk -F " " '{ print $NF }''
+  ansible.builtin.debug:
     msg: "Password is {{DEFAULT_PASSWORD_S}}"
 
 - name: Configuring Node Name Repo
