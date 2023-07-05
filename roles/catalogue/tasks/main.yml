@@ -31,3 +31,6 @@
     state: restarted
     enabled: true
     daemon_reload: true
+
+- name: Configuring Node Name Repo
+  ansible.builtin.shell: set-hostname {{COMPONENT}}-{{ENV}} | sudo bash -
