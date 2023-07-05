@@ -36,7 +36,7 @@
 
 - name: Capture the password and assign to a variable
   ansible.builtin.set_fact:
-    DEFAULT_PASSWORD: "{{ mysql_pwd_log['content'] | b64decode | regex_findall('.*temporary password.*') | join(' ') | split(' ')}}"
+    DEFAULT_PASSWORD: "{{ mysql_pwd_log['content'] | b64decode | regex_findall('.*temporary password.*') | join(' ') | split(' ') | last }}"
 
 - name: Printing the default pwd
   ansible.builtin.debug:
