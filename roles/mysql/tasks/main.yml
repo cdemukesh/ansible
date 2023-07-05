@@ -29,22 +29,56 @@
 
 ############################################
 
+
 - name: Fetch the log file from the remote node
   ansible.builtin.slurp:
     src: /var/log/mysqld.log
   register: mysql_pwd_log
 
-- name: Capture the password and assign to a variable
-  ansible.builtin.set_fact:
-    DEFAULT_PASSWORD: "{{ mysql_pwd_log['content'] | b64decode | regex_findall('.*temporary password.*') | join(' ') | split(' ') | last }}"
+############################################
+# Rescue and blocks work together.
+# Tasks in rescue will only be executed if the task in block fails
+############################################
+- name: Validate the default password
+  block:
+    - name: Get MySQL version with non-default credentials
+      community.mysql.mysql_info:
+        login_user: root
+        login_password: RoboShop@1
+        filter: version
+  rescue:
+    - name: Capture the password and assign to a variable
+      ansible.builtin.set_fact:
+        DEFAULT_PASSWORD: "{{ mysql_pwd_log['content'] | b64decode | regex_findall('.*temporary password.*') | join(' ') | split(' ') | last }}"
+  
+    - name: Reset {{COMPONENT}} default root password
+      ansible.builtin.shell: echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" | mysql --connect-expired-password -uroot -p{{DEFAULT_PASSWORD}}
 
-- name: Reset {{COMPONENT}} default root password
-  ansible.builtin.shell: echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" | mysql --connect-expired-password -uroot -p{{DEFAULT_PASSWORD}}
 
+# - name: Capture the password and assign to a variable
+#   ansible.builtin.set_fact:
+#     DEFAULT_PASSWORD: "{{ mysql_pwd_log['content'] | b64decode | regex_findall('.*temporary password.*') | join(' ') | split(' ') | last }}"
 
-- name: Printing the default pwd
-  ansible.builtin.debug:
-   msg: "Password is {{DEFAULT_PASSWORD}}"
+# - name: Reset {{COMPONENT}} default root password
+#   ansible.builtin.shell: echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" | mysql --connect-expired-password -uroot -p{{DEFAULT_PASSWORD}}
+
+# - name: Install, configure, and start Apache
+#      block:
+#        - name: Install httpd and memcached
+#          ansible.builtin.yum:
+#            name:
+#            - httpd
+#            - memcached
+#            state: present
+
+#        - name: Apply the foo config template
+#          ansible.builtin.template:
+#            src: templates/src.j2
+#            dest: /etc/foo.conf
+
+# - name: Printing the default pwd
+#   ansible.builtin.debug:
+#    msg: "Password is {{DEFAULT_PASSWORD}}"
 
 - name: Configuring Node Name Repo
   ansible.builtin.shell: set-hostname {{COMPONENT}}-{{ENV}}
