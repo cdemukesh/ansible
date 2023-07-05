@@ -38,6 +38,10 @@
   ansible.builtin.set_fact:
     DEFAULT_PASSWORD: "{{ mysql_pwd_log['content'] | b64decode | regex_findall('.*temporary password.*') | join(' ') | split(' ') | last }}"
 
+- name: Reset {{COMPONENT}} default root password
+  ansible.builtin.shell: echo "ALTER user 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" | mysql --connect-expired-password -p{{DEFAULT_PASSWORD}}
+
+
 - name: Printing the default pwd
   ansible.builtin.debug:
    msg: "Password is {{DEFAULT_PASSWORD}}"
