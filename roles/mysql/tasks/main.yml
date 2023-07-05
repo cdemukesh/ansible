@@ -21,7 +21,7 @@
   
 - name: Printing the default pwd
   ansible.builtin.debug:
-    msg: "Password is {{DEFAULT_PASSWORD_S}}"
+    msg: "Password is {{DEFAULT_PASSWORD_S}}.stdout"
 
 - name: Configuring Node Name Repo
   ansible.builtin.shell: set-hostname {{COMPONENT}}-{{ENV}}
