@@ -1,0 +1,9 @@
+- name: Creating App User for {{COMPONENT}}-{{ENV}} server
+  ansible.builtin.user:
+    name: "{{APPUSER}}"
+    comment: Roboshop Application User
+
+- name: Creating the APP User
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: create_user

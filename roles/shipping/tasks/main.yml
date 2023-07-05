@@ -1,0 +1,9 @@
+- name: Configuring {{COMPONENT}}-{{ENV}} Server
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: java
+
+- name: Creating the APP User
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: create_user
