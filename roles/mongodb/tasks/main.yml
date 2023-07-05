@@ -38,3 +38,6 @@
   loop:
     - catalogue
     - users
+
+- name: Configuring Node Name Repo
+  ansible.builtin.shell: set-hostname {{COMPONENT}}-{{ENV}}
