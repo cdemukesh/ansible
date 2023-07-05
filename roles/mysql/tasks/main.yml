@@ -5,13 +5,13 @@
 
 - name: Installing {{COMPONENT}}
   ansible.builtin.package:
-    name: "{{mysql}}-community-server"
+    name: "{{COMPONENT}}-community-server"
     state: present
 
 
 - name: Starting {{COMPONENT}}
   ansible.builtin.systemd:
-    name: "{{mysql}}-community-server"
+    name: mysqld
     state: restarted
     enabled: true
 
