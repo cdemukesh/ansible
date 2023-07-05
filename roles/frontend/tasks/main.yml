@@ -23,7 +23,7 @@
 - name: Copy the proxy config
   ansible.builtin.template:
     src: roboshop.conf
-    dest: /usr/share/nginx/html
+    dest: /etc/nginx/default.d/roboshop.conf
 
 
 - name: Starting nginx
