@@ -16,7 +16,7 @@
 - name: Generating {{COMPONENT}} Artifacts
   ansible.builtin.shell: mvn clean package && mv target/{{COMPONENT}}-1.0.jar {{COMPONENT}}.jar
   args:
-    chdir: cd /home/{{APPUSER}}/{{COMPONENT}}
+    chdir: /home/{{APPUSER}}/{{COMPONENT}}
 
 - name: Copying the systemd file
   ansible.builtin.template:
