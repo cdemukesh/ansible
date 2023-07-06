@@ -2,6 +2,7 @@
   ansible.builtin.user:
     name: "{{APPUSER}}"
     comment: Roboshop Application User
+  register: OUT
 
 # - name: Creating the APP User
 #   ansible.builtin.include_role:
