@@ -16,6 +16,21 @@
     name: common
     tasks_from: download
 
+- name: Just fetching the output
+  ansible.builtin.shell: id roboshop
+  register: output
+
+- name: Just printing the output
+  ansible.builtin.debug:
+    msg: Value is {{output.stdout}}
+    
+# - name: Ensure SELinux is set to enforcing mode
+#   ansible.builtin.lineinfile:
+#     path: /etc/selinux/config
+#     regexp: '^SELINUX='
+#     line: SELINUX=enforcing
+
+
 # - name: Generaring Artifacts
 #   community.general.npm:
 #     path: /home/{{APPUSER}}/{{COMPONENT}}/
