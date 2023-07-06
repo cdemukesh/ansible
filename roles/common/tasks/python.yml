@@ -19,14 +19,19 @@
 - name: Updating the UID in {{COMPONENT}}.ini file
   ansible.builtin.lineinfile:
     path: /home/{{APPUSER}}/{{COMPONENT}}/{{COMPONENT}}.ini
-    regexp: '^uid='
+    regexp: '^uid'
     line: uid = {{OUT.uid}}
 
 - name: Updating the GID in {{COMPONENT}}.ini file
   ansible.builtin.lineinfile:
     path: /home/{{APPUSER}}/{{COMPONENT}}/{{COMPONENT}}.ini
-    regexp: '^gid='
+    regexp: '^gid'
     line: gid = {{OUT.group}}
+
+- name: Installing the {{COMPONENT}} Artifacts
+  ansible.builtin.pip:
+    requirements: /home/{{APPUSER}}/{{COMPONENT}}/requirements.txt
+    executable: pip3
 
 # - name: Generaring Artifacts
 #   community.general.npm:
