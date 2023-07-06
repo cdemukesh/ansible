@@ -4,8 +4,10 @@
     dest: /etc/yum.repos.d/{{COMPONENT}}.repo
 
 - name: Installing {{COMPONENT}}
-  ansible.builtin.package:
-    name: "{{COMPONENT}}-community-server"
+  ansible.builtin.yum:
+    name: 
+      - "{{COMPONENT}}-community-server"
+      - pymysql
     state: present
 
 
@@ -57,6 +59,7 @@
 
     - name: Uninstall plugin
       ansible.builtin.shell: echo "UNINSTALL PLUGIN validate_password;" | mysql -uroot -pRoboShop@1
+      ignore_errors: true
 
 
 # - name: Capture the password and assign to a variable
