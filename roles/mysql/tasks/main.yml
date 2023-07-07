@@ -7,6 +7,7 @@
   ansible.builtin.yum:
     name: 
       - "{{COMPONENT}}-community-server"
+      #- python3-PyMySQL
       - MySQL-python
     state: present
 
@@ -50,51 +51,16 @@
         src: /var/log/mysqld.log
       register: mysql_pwd_log
     
-    - name: Capture the password and assign to a variable
+    - name: Grep the password and assign to a variable
       ansible.builtin.set_fact:
         DEFAULT_PASSWORD: "{{ mysql_pwd_log['content'] | b64decode | regex_findall('.*temporary password.*') | join(' ') | split(' ') | last }}"
   
     - name: Reset {{COMPONENT}} default root password
       ansible.builtin.shell: echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" | mysql --connect-expired-password -uroot -p{{DEFAULT_PASSWORD}}
 
-    - name: Uninstall plugin
+    - name: Uninstall {{COMPONENT}} password vaidate plugin
       ansible.builtin.shell: echo "UNINSTALL PLUGIN validate_password;" | mysql -uroot -pRoboShop@1
       ignore_errors: true
-
-
-# - name: Capture the password and assign to a variable
-#   ansible.builtin.set_fact:
-#     DEFAULT_PASSWORD: "{{ mysql_pwd_log['content'] | b64decode | regex_findall('.*temporary password.*') | join(' ') | split(' ') | last }}"
-
-# - name: Reset {{COMPONENT}} default root password
-#   ansible.builtin.shell: echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" | mysql --connect-expired-password -uroot -p{{DEFAULT_PASSWORD}}
-
-# - name: Install, configure, and start Apache
-#      block:
-#        - name: Install httpd and memcached
-#          ansible.builtin.yum:
-#            name:
-#            - httpd
-#            - memcached
-#            state: present
-
-#        - name: Apply the foo config template
-#          ansible.builtin.template:
-#            src: templates/src.j2
-#            dest: /etc/foo.conf
-
-# - name: Printing the default pwd
-#   ansible.builtin.debug:
-#    msg: "Password is {{DEFAULT_PASSWORD}}"
-
-# - name: Configuring Node Name Repo
-#  ansible.builtin.shell: set-hostname {{COMPONENT}}-{{ENV}}
-
-# - name: Downloading and extracting the component
-#   ansible.builtin.unarchive:
-#     src: https://github.com/stans-robot-project/{{COMPONENT}}/archive/main.zip
-#     dest: /tmp
-#     remote_src: yes
 
 - name: Download and extract the {{COMPONENT}}
   ansible.builtin.include_role:
@@ -108,8 +74,6 @@
     target: /tmp/{{COMPONENT}}-main/shipping.sql
     login_user: root
     login_password: RoboShop@1
-
-
 
 - name: Configuring Node Name Repo
   ansible.builtin.shell: set-hostname {{COMPONENT}}-{{ENV}}
