@@ -7,8 +7,8 @@
   ansible.builtin.yum:
     name: 
       - "{{COMPONENT}}-community-server"
-      #- python3-PyMySQL
-      - MySQL-python
+      - python3-PyMySQL
+      #- MySQL-python
     state: present
 
 
