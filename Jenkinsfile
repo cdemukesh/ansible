@@ -17,6 +17,8 @@ pipeline {
         stage('Ansible Lint Checks') {
             when { branch pattern: "feature-.*", comparator: "REGEXP"}
             steps {
+                sh "env"
+                sh "echo Running against the feature branch whose name is ${GIT_BRANCH}"
                 sh "echo Lint Checks Completed"
             }
         }
