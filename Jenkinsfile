@@ -11,6 +11,7 @@ pipeline {
         stage('Ansible Code Scan') {
             steps {
                 sh "echo Code Scan Completed"
+                sh "env.TAG_NAME"
             }
         }
         
