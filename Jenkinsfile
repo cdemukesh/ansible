@@ -42,7 +42,7 @@ pipeline {
         stage('Promoting Code to Prod Branch') {
             when { 
                 expression { 
-                    $TAG_NAME == ".*"          // TAG_NAME ENV variable will only be available if you run it against a TAG 
+                    env.TAG_NAME != null          // TAG_NAME ENV variable will only be available if you run it against a TAG 
                     } 
             }
             //when { tag ".*" }
