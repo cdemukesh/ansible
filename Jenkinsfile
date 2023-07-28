@@ -11,7 +11,7 @@ pipeline {
         stage('Ansible Code Scan') {
             steps {
                 sh "echo Code Scan Completed"
-                sh "env.TAG_NAME"
+                //sh "env.TAG_NAME"
             }
         }
         
@@ -40,12 +40,12 @@ pipeline {
         //     }
         // }
         stage('Promoting Code to Prod Branch') {
-            when { 
-                expression { 
-                    $TAG_NAME == ".*"          // TAG_NAME ENV variable will only be available if you run it against a TAG 
-                    } 
-            }
-            //when { tag ".*" }
+            // when { 
+            //     expression { 
+            //         $TAG_NAME == ".*"          // TAG_NAME ENV variable will only be available if you run it against a TAG 
+            //         } 
+            // }
+            when { tag ".*" }
             steps {
                 sh "echo Merging the feature branch to PROD Brnach"
             }
